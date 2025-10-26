@@ -2,6 +2,12 @@
 
 All notable changes to the "Fast Run - Terminal Command Manager" plugin will be documented in this file.
 
+## [1.0.2] - 2025-10-27
+
+### Fixed
+- Replaced deprecated TerminalView API with modern TerminalToolWindowManager
+- Resolved "scheduled for removal" API warnings
+
 ## [1.0.1] - 2025-10-27
 
 ### Changed

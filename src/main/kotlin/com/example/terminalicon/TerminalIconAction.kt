@@ -4,9 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.wm.ToolWindowManager
-import org.jetbrains.plugins.terminal.ShellTerminalWidget
-import org.jetbrains.plugins.terminal.TerminalToolWindowFactory
-import org.jetbrains.plugins.terminal.TerminalView
+import org.jetbrains.plugins.terminal.TerminalToolWindowManager
 
 class TerminalIconAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
@@ -25,17 +23,15 @@ class TerminalIconAction : AnAction() {
 
     companion object {
         fun executeCommandsInTerminal(project: com.intellij.openapi.project.Project, savedCommand: SavedCommand) {
-            val terminalView = TerminalView.getInstance(project)
-
             ApplicationManager.getApplication().invokeLater {
-                // Create a new terminal tab
-                val widget = terminalView.createLocalShellWidget(project.basePath, savedCommand.name)
+                val terminalManager = TerminalToolWindowManager.getInstance(project)
+
+                // Create a new terminal tab with the command name
+                val shellRunner = terminalManager.createLocalShellWidget(project.basePath, savedCommand.name, true, false)
 
                 // Execute all commands in sequence
-                widget?.let {
-                    savedCommand.commands.forEach { command ->
-                        it.executeCommand(command)
-                    }
+                savedCommand.commands.forEach { command ->
+                    shellRunner.executeCommand(command)
                 }
             }
         }
