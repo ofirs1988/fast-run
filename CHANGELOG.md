@@ -2,6 +2,12 @@
 
 All notable changes to the "Fast Run - Terminal Command Manager" plugin will be documented in this file.
 
+## [1.0.1] - 2025-10-27
+
+### Changed
+- Updated repository URL to https://github.com/ofirs1988/fast-run
+- Clean commit history for production release
+
 ## [1.0.0] - 2025-10-26
 
 ### Added
