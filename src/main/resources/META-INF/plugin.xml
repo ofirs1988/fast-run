@@ -1,0 +1,52 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.example.terminal-icon-plugin</id>
+    <name>Terminal Icon Plugin</name>
+    <vendor>Example</vendor>
+
+    <description><![CDATA[
+    A simple plugin that adds an icon next to the terminal icon.
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Command Storage Service -->
+        <applicationService serviceImplementation="com.example.terminalicon.CommandStorageService"/>
+    </extensions>
+
+    <actions>
+        <action id="TerminalIconAction"
+                class="com.example.terminalicon.TerminalIconAction"
+                text="Manage Commands..."
+                description="Manage and run saved terminal commands"
+                icon="/icons/terminal-custom.svg">
+            <!-- Add to main toolbar (always visible at top) -->
+            <add-to-group group-id="MainToolBar" anchor="first"/>
+            <!-- Add to navigation bar toolbar -->
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+        </action>
+
+        <!-- Fast Run - New Main Menu -->
+        <group id="FastRunMenu" text="Fast Run" description="Quick access to saved commands" popup="true">
+            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="RunMenu"/>
+
+            <!-- Add manage commands action -->
+            <action id="ManageFastRunCommands"
+                    class="com.example.terminalicon.TerminalIconAction"
+                    text="Manage Commands..."
+                    description="Add, edit, or remove saved commands"
+                    icon="/icons/terminal-custom.svg"/>
+
+            <separator/>
+
+            <!-- Dynamic list of saved commands -->
+            <group id="FastRunCommandsGroup"
+                   class="com.example.terminalicon.SavedCommandsActionGroup"
+                   text="Saved Commands"
+                   description="Your saved terminal commands"
+                   popup="false"/>
+        </group>
+    </actions>
+</idea-plugin>
