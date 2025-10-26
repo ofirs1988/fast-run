@@ -1,11 +1,33 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.example.terminal-icon-plugin</id>
-    <name>Terminal Icon Plugin</name>
-    <vendor>Example</vendor>
+    <id>com.ofirs.fastrun</id>
+    <name>Fast Run - Terminal Command Manager</name>
+    <vendor email="ofirs1988cs@gmail.com" url="https://github.com/ofirs1988/jetbrains_extensions">Ofir S</vendor>
 
     <description><![CDATA[
-    A simple plugin that adds an icon next to the terminal icon.
+    <h2>Fast Run - Quick Terminal Command Manager</h2>
+
+    <p>Save and execute your favorite terminal commands with a single click!</p>
+
+    <h3>Features:</h3>
+    <ul>
+      <li><strong>Save Multiple Commands:</strong> Store unlimited terminal commands with custom names</li>
+      <li><strong>Run Command Sequences:</strong> Execute multiple commands in sequence with one click</li>
+      <li><strong>Fast Run Menu:</strong> New dedicated menu in the main menu bar for quick access</li>
+      <li><strong>Toolbar Icon:</strong> Beautiful green icon for instant access to command manager</li>
+      <li><strong>Persistent Storage:</strong> Your commands are saved automatically and persist across IDE restarts</li>
+      <li><strong>Easy Management:</strong> Simple dialog to add, edit, and delete saved commands</li>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ol>
+      <li>Click the green toolbar icon or go to Fast Run → Manage Commands</li>
+      <li>Add your commands (one per line for sequences)</li>
+      <li>Access them anytime from the Fast Run menu</li>
+      <li>Commands execute in a new terminal tab automatically</li>
+    </ol>
+
+    <p><strong>Perfect for:</strong> npm scripts, build commands, deployment scripts, git workflows, and any repetitive terminal tasks!</p>
   ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

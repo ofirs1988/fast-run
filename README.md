@@ -1,6 +1,8 @@
-# Terminal Icon Plugin
+# Fast Run - Terminal Command Manager
 
-תוסף פשוט ל-JetBrains IDEs שמוסיף אייקון ליד אייקון הטרמינל.
+**Save and execute your favorite terminal commands with a single click!**
+
+A powerful productivity plugin for JetBrains IDEs that lets you save, organize, and quickly run terminal commands.
 
 ## מבנה הפרויקט
 
@@ -44,12 +46,61 @@ jetbrains_extention/
    ./gradlew verifyPlugin
    ```
 
-## מה התוסף עושה?
+## ✨ Features
 
-התוסף מוסיף כפתור עם אייקון כחול ליד כפתור הטרמינל ב-toolbar. כשלוחצים על האייקון, הוא פותח את חלון הטרמינל.
+- **💾 Save Multiple Commands:** Store unlimited terminal commands with custom names
+- **🚀 Run Command Sequences:** Execute multiple commands in sequence with one click
+- **📋 Fast Run Menu:** New dedicated menu in the main menu bar for quick access
+- **🎨 Toolbar Icon:** Beautiful green icon for instant access to command manager
+- **💪 Persistent Storage:** Your commands are saved automatically and persist across IDE restarts
+- **📝 Easy Management:** Simple dialog to add, edit, and delete saved commands
 
-## התאמה אישית
+## 🎯 Perfect For
 
-- **לשנות את האייקון:** ערוך את הקובץ `src/main/resources/icons/terminal-custom.svg`
-- **לשנות את המיקום:** ערוך את `plugin.xml` בשורה שמתחילה ב-`<add-to-group`
-- **לשנות את הפעולה:** ערוך את `TerminalIconAction.kt`
+- npm/yarn scripts (build, test, deploy)
+- Docker commands
+- Git workflows
+- Build and deployment scripts
+- Database migrations
+- Any repetitive terminal tasks!
+
+## 📦 Installation
+
+### From JetBrains Marketplace (Coming Soon)
+1. Open IntelliJ IDEA / WebStorm / PyCharm
+2. Go to `Settings` → `Plugins` → `Marketplace`
+3. Search for "Fast Run"
+4. Click `Install`
+
+### Manual Installation
+1. Download the latest `.zip` from [Releases](https://github.com/ofirs1988/jetbrains_extensions/releases)
+2. Go to `Settings` → `Plugins` → ⚙️ → `Install Plugin from Disk`
+3. Select the downloaded ZIP file
+4. Restart IDE
+
+## 🚀 Usage
+
+### Adding Commands
+1. Click the green toolbar icon 🟢 OR go to **Fast Run → Manage Commands...**
+2. Enter a name for your command (e.g., "Build Project")
+3. Add your commands (one per line for sequences):
+   ```
+   npm install
+   npm run build
+   npm test
+   ```
+4. Click **Save Command**
+
+### Running Commands
+- **Option 1:** Go to **Fast Run** menu and click your saved command
+- **Option 2:** Click the toolbar icon and select from saved commands
+
+### Command Sequences
+Add multiple commands (one per line) and they'll run in order:
+```
+git pull
+npm install
+npm run build
+```
+
+## 🛠️ Development
