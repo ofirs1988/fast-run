@@ -30,4 +30,4 @@ All notable changes to the "Fast Run - Terminal Command Manager" plugin will be 
 - Gradle-based build system
 - Lightweight (22KB plugin size)
 
-[1.0.0]: https://github.com/ofirs1988/jetbrains_extensions/releases/tag/v1.0.0
+[1.0.0]: https://github.com/ofirs1988/fast-run/releases/tag/v1.0.0

@@ -73,7 +73,7 @@ jetbrains_extention/
 4. Click `Install`
 
 ### Manual Installation
-1. Download the latest `.zip` from [Releases](https://github.com/ofirs1988/jetbrains_extensions/releases)
+1. Download the latest `.zip` from [Releases](https://github.com/ofirs1988/fast-run/releases)
 2. Go to `Settings` → `Plugins` → ⚙️ → `Install Plugin from Disk`
 3. Select the downloaded ZIP file
 4. Restart IDE
