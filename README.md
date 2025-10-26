@@ -4,44 +4,44 @@
 
 A powerful productivity plugin for JetBrains IDEs that lets you save, organize, and quickly run terminal commands.
 
-## מבנה הפרויקט
+## Project Structure
 
 ```
 jetbrains_extention/
-├── build.gradle.kts          # קובץ הבנייה של Gradle
-├── settings.gradle.kts       # הגדרות Gradle
-├── gradle.properties         # מאפייני התוסף
+├── build.gradle.kts          # Gradle build configuration
+├── settings.gradle.kts       # Gradle settings
+├── gradle.properties         # Plugin properties
 └── src/
     └── main/
         ├── kotlin/
         │   └── com/example/terminalicon/
-        │       └── TerminalIconAction.kt    # ה-Action שמפעיל את הטרמינל
+        │       └── TerminalIconAction.kt    # Main action handler
         └── resources/
             ├── META-INF/
-            │   └── plugin.xml               # הגדרות התוסף
+            │   └── plugin.xml               # Plugin configuration
             └── icons/
-                └── terminal-custom.svg      # האייקון המותאם אישית
+                └── terminal-custom.svg      # Custom icon
 ```
 
-## איך לבנות ולהריץ
+## Build and Run
 
-### דרישות מקדימות
-- JDK 17 או גרסה חדשה יותר
-- Gradle (או השתמש ב-Gradle wrapper שיורד אוטומטית)
+### Prerequisites
+- JDK 17 or higher
+- Gradle (or use the included Gradle wrapper)
 
-### פקודות
+### Commands
 
-1. **לבנות את התוסף:**
+1. **Build the plugin:**
    ```bash
    ./gradlew buildPlugin
    ```
 
-2. **להריץ IDE עם התוסף:**
+2. **Run IDE with plugin:**
    ```bash
    ./gradlew runIde
    ```
 
-3. **לבדוק את התוסף:**
+3. **Verify plugin:**
    ```bash
    ./gradlew verifyPlugin
    ```
