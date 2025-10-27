@@ -2,6 +2,11 @@
 
 All notable changes to the "Fast Run - Terminal Command Manager" plugin will be documented in this file.
 
+## [1.0.3] - 2025-10-27
+
+### Fixed
+- Version bump for marketplace submission
+
 ## [1.0.2] - 2025-10-27
 
 ### Fixed
