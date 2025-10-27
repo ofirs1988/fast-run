@@ -5,8 +5,8 @@ All notable changes to the "Fast Run - Terminal Command Manager" plugin will be 
 ## [1.0.2] - 2025-10-27
 
 ### Fixed
-- Replaced deprecated TerminalView API with modern TerminalToolWindowManager
-- Resolved "scheduled for removal" API warnings
+- Added deprecation suppression for Terminal API
+- Note: Currently using TerminalView API which is scheduled for deprecation. JetBrains is transitioning the Terminal API, and we will update to the stable replacement once available
 
 ## [1.0.1] - 2025-10-27
 
