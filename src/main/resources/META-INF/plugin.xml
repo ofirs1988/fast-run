@@ -41,13 +41,15 @@
     <actions>
         <action id="TerminalIconAction"
                 class="com.example.terminalicon.TerminalIconAction"
-                text="Manage Commands..."
+                text="Fast Run..."
                 description="Manage and run saved terminal commands"
                 icon="/icons/terminal-custom.svg">
             <!-- Add to main toolbar (always visible at top) -->
             <add-to-group group-id="MainToolBar" anchor="first"/>
             <!-- Add to navigation bar toolbar -->
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <!-- Add to Terminal toolbar -->
+            <add-to-group group-id="TerminalToolwindowActionGroup" anchor="first"/>
         </action>
 
         <!-- Fast Run - New Main Menu -->
@@ -65,6 +67,28 @@
 
             <!-- Dynamic list of saved commands -->
             <group id="FastRunCommandsGroup"
+                   class="com.example.terminalicon.SavedCommandsActionGroup"
+                   text="Saved Commands"
+                   description="Your saved terminal commands"
+                   popup="false"/>
+        </group>
+
+        <!-- Fast Run in Terminal Context Menu (Right-Click) -->
+        <group id="FastRunTerminalPopupMenu" text="Fast Run" description="Quick access to saved commands" popup="true">
+            <add-to-group group-id="TerminalToolwindowActionGroup" anchor="last"/>
+            <separator/>
+
+            <!-- Manage commands in context menu -->
+            <action id="TerminalContextManageCommands"
+                    class="com.example.terminalicon.TerminalIconAction"
+                    text="⚙ Manage Commands..."
+                    description="Add, edit, or remove saved commands"
+                    icon="/icons/terminal-custom.svg"/>
+
+            <separator/>
+
+            <!-- Dynamic list of saved commands in context menu -->
+            <group id="FastRunTerminalCommandsGroup"
                    class="com.example.terminalicon.SavedCommandsActionGroup"
                    text="Saved Commands"
                    description="Your saved terminal commands"

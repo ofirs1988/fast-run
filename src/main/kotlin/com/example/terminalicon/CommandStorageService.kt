@@ -10,6 +10,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 )
 class CommandStorageService : PersistentStateComponent<CommandStorageService> {
     var savedCommands: MutableList<SavedCommand> = mutableListOf()
+    var executionHistory: MutableList<ExecutionHistoryEntry> = mutableListOf()
 
     override fun getState(): CommandStorageService = this
 
@@ -17,12 +18,43 @@ class CommandStorageService : PersistentStateComponent<CommandStorageService> {
         XmlSerializerUtil.copyBean(state, this)
     }
 
-    fun addCommand(name: String, commands: List<String>) {
-        savedCommands.add(SavedCommand(name, commands.toMutableList()))
+    fun addCommand(name: String, commands: List<String>, workingDir: String = "", icon: String = "default", shortcut: String = "", isFavorite: Boolean = false, envVars: Map<String, String> = emptyMap()) {
+        savedCommands.add(SavedCommand(name, commands.toMutableList(), workingDir, icon, shortcut, isFavorite, envVars.toMutableMap()))
+    }
+
+    fun updateCommand(oldCommand: SavedCommand, name: String, commands: List<String>, workingDir: String = "", icon: String = "default", shortcut: String = "", isFavorite: Boolean = false, envVars: Map<String, String> = emptyMap()) {
+        val index = savedCommands.indexOf(oldCommand)
+        if (index != -1) {
+            savedCommands[index] = SavedCommand(name, commands.toMutableList(), workingDir, icon, shortcut, isFavorite, envVars.toMutableMap())
+        }
+    }
+
+    fun toggleFavorite(command: SavedCommand) {
+        command.isFavorite = !command.isFavorite
+    }
+
+    fun getFavoriteCommands(): List<SavedCommand> {
+        return savedCommands.filter { it.isFavorite }
     }
 
     fun removeCommand(command: SavedCommand) {
         savedCommands.remove(command)
+    }
+
+    fun addToHistory(commandName: String, timestamp: Long = System.currentTimeMillis()) {
+        executionHistory.add(0, ExecutionHistoryEntry(commandName, timestamp))
+        // Keep only last 100 entries
+        if (executionHistory.size > 100) {
+            executionHistory.removeAt(executionHistory.size - 1)
+        }
+    }
+
+    fun importCommands(commands: List<SavedCommand>) {
+        savedCommands.addAll(commands)
+    }
+
+    fun exportCommands(): List<SavedCommand> {
+        return savedCommands.toList()
     }
 
     companion object {
@@ -32,12 +64,39 @@ class CommandStorageService : PersistentStateComponent<CommandStorageService> {
     }
 }
 
+data class ExecutionHistoryEntry(
+    var commandName: String = "",
+    var timestamp: Long = 0
+)
+
 data class SavedCommand(
     var name: String = "",
-    var commands: MutableList<String> = mutableListOf()
+    var commands: MutableList<String> = mutableListOf(),
+    var workingDirectory: String = "",
+    var icon: String = "default",
+    var keyboardShortcut: String = "",
+    var isFavorite: Boolean = false,
+    var environmentVariables: MutableMap<String, String> = mutableMapOf()
 ) {
     // For display purposes - show all commands separated by " && "
     fun getCommandsAsString(): String {
         return commands.joinToString(" && ")
+    }
+
+    // Process variables in commands
+    fun processVariables(projectName: String, projectPath: String, fileName: String = ""): List<String> {
+        return commands.map { command ->
+            command
+                .replace("{project_name}", projectName)
+                .replace("{project_path}", projectPath)
+                .replace("{file_name}", fileName)
+                .replace("{date}", java.time.LocalDate.now().toString())
+                .replace("{time}", java.time.LocalTime.now().toString())
+        }
+    }
+
+    fun getEnvVarsAsString(): String {
+        if (environmentVariables.isEmpty()) return "None"
+        return environmentVariables.entries.joinToString(", ") { "${it.key}=${it.value}" }
     }
 }

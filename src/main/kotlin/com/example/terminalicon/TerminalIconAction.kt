@@ -31,12 +31,35 @@ class TerminalIconAction : AnAction() {
                 // Use TerminalView which is the stable API
                 val terminalView = TerminalView.getInstance(project)
 
+                // Determine working directory
+                val workingDir = if (savedCommand.workingDirectory.isNotEmpty()) {
+                    savedCommand.workingDirectory
+                } else {
+                    project.basePath
+                }
+
                 // Create a new terminal tab with the command name
-                val shellWidget = terminalView.createLocalShellWidget(project.basePath, savedCommand.name)
+                val shellWidget = terminalView.createLocalShellWidget(workingDir, savedCommand.name)
+
+                // Process variables in commands
+                val processedCommands = savedCommand.processVariables(
+                    projectName = project.name,
+                    projectPath = project.basePath ?: "",
+                    fileName = ""
+                )
 
                 // Execute all commands in sequence
                 shellWidget?.let { widget ->
-                    savedCommand.commands.forEach { command ->
+                    // Set environment variables first
+                    if (savedCommand.environmentVariables.isNotEmpty()) {
+                        savedCommand.environmentVariables.forEach { (key, value) ->
+                            // Use export for Unix/Linux/Mac, set for Windows
+                            widget.executeCommand("export $key=\"$value\"")
+                        }
+                    }
+
+                    // Execute the commands
+                    processedCommands.forEach { command ->
                         widget.executeCommand(command)
                     }
                 }
